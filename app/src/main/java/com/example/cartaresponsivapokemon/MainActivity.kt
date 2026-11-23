@@ -32,19 +32,6 @@ import androidx.compose.ui.util.lerp
 import com.example.cartaresponsivapokemon.ui.theme.CartaresponsivapokemonTheme
 import kotlin.math.absoluteValue
 
-data class PokemonCardState(
-    val nameRes: Int,
-    val hp: String,
-    val imageRes: Int,
-    val descriptionRes: Int,
-    val attack1NameRes: Int,
-    val attack1Damage: String,
-    val attack2NameRes: Int,
-    val attack2Damage: String,
-    val weakness: String,
-    val resistance: String,
-)
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,69 +47,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GalleryScreen() {
-    val pokemonList = listOf(
-        PokemonCardState(
-            nameRes = R.string.pikachu_name,
-            hp = "60",
-            imageRes = R.drawable.bicho,
-            descriptionRes = R.string.pikachu_desc,
-            attack1NameRes = R.string.pikachu_attack_1,
-            attack1Damage = "55",
-            attack2NameRes = R.string.pikachu_attack_2,
-            attack2Damage = "35",
-            weakness = stringResource(R.string.weakness_fighting),
-            resistance = stringResource(R.string.resistance_steel),
-        ),
-        PokemonCardState(
-            nameRes = R.string.charmander_name,
-            hp = "70",
-            imageRes = R.drawable.bicho,
-            descriptionRes = R.string.charmander_desc,
-            attack1NameRes = R.string.charmander_attack_1,
-            attack1Damage = "50",
-            attack2NameRes = R.string.charmander_attack_2,
-            attack2Damage = "40",
-            weakness = stringResource(R.string.weakness_water),
-            resistance = stringResource(R.string.resistance_grass),
-        ),
-        PokemonCardState(
-            nameRes = R.string.bulbasaur_name,
-            hp = "80",
-            imageRes = R.drawable.bicho,
-            descriptionRes = R.string.bulbasaur_desc,
-            attack1NameRes = R.string.bulbasaur_attack_1,
-            attack1Damage = "45",
-            attack2NameRes = R.string.bulbasaur_attack_2,
-            attack2Damage = "30",
-            weakness = stringResource(R.string.weakness_fire),
-            resistance = stringResource(R.string.resistance_water),
-        ),
-        PokemonCardState(
-            nameRes = R.string.squirtle_name,
-            hp = "70",
-            imageRes = R.drawable.bicho,
-            descriptionRes = R.string.squirtle_desc,
-            attack1NameRes = R.string.squirtle_attack_1,
-            attack1Damage = "40",
-            attack2NameRes = R.string.squirtle_attack_2,
-            attack2Damage = "30",
-            weakness = stringResource(R.string.weakness_electric),
-            resistance = stringResource(R.string.resistance_steel),
-        ),
-        PokemonCardState(
-            nameRes = R.string.snorlax_name,
-            hp = "120",
-            imageRes = R.drawable.bicho,
-            descriptionRes = R.string.snorlax_desc,
-            attack1NameRes = R.string.snorlax_attack_1,
-            attack1Damage = "0",
-            attack2NameRes = R.string.snorlax_attack_2,
-            attack2Damage = "90",
-            weakness = stringResource(R.string.weakness_fighting),
-            resistance = stringResource(R.string.resistance_psychic),
-        ),
-    )
-
+    val pokemonList = getPokemonList()
     val pagerState = rememberPagerState { pokemonList.size }
 
     Scaffold(
@@ -382,12 +307,12 @@ fun CrearCarta(pokemon: PokemonCardState) {
                     horizontalArrangement = Arrangement.SpaceAround,
                 ) {
                     Text(
-                        text = pokemon.weakness,
+                        text = stringResource(pokemon.weaknessRes),
                         fontSize = 10.sp,
                         color = Color.Gray,
                     )
                     Text(
-                        text = pokemon.resistance,
+                        text = stringResource(pokemon.resistanceRes),
                         fontSize = 10.sp,
                         color = Color.Gray,
                     )
