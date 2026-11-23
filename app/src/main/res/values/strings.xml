@@ -19,13 +19,27 @@
     <string name="bulbasaur_attack_1">🍃 Látigo Cepa</string>
     <string name="bulbasaur_attack_2">🌿 Drenadoras</string>
 
+    <!-- Squirtle -->
+    <string name="squirtle_name">Squirtle</string>
+    <string name="squirtle_desc">Tortuga acuática. Se esconde en su caparazón y luego rocía agua a presión.</string>
+    <string name="squirtle_attack_1">💧 Pistola Agua</string>
+    <string name="squirtle_attack_2">🌊 Placaje</string>
+
+    <!-- Snorlax -->
+    <string name="snorlax_name">Snorlax</string>
+    <string name="snorlax_desc">Duerme todo el día. Su estómago puede digerir cualquier tipo de comida, incluso venenosa.</string>
+    <string name="snorlax_attack_1">💤 Descanso</string>
+    <string name="snorlax_attack_2">💥 Golpe Cuerpo</string>
+
     <!-- Shared Labels -->
     <string name="ps_label">PS</string>
     <string name="image_desc">Imagen del Pokémon</string>
     <string name="weakness_fighting">Debilidad: x2 Lucha</string>
     <string name="weakness_water">Debilidad: x2 Agua</string>
     <string name="weakness_fire">Debilidad: x2 Fuego</string>
+    <string name="weakness_electric">Debilidad: x2 Eléctrico</string>
     <string name="resistance_steel">Resistencia: -20 Acero</string>
     <string name="resistance_grass">Resistencia: -20 Planta</string>
     <string name="resistance_water">Resistencia: -20 Agua</string>
+    <string name="resistance_psychic">Resistencia: -20 Psíquico</string>
 </resources>

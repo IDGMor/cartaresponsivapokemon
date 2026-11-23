@@ -8,6 +8,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -16,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -24,7 +28,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.util.lerp
 import com.example.cartaresponsivapokemon.ui.theme.CartaresponsivapokemonTheme
+import kotlin.math.absoluteValue
 
 data class PokemonCardState(
     val nameRes: Int,
@@ -45,7 +51,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CartaresponsivapokemonTheme {
-                MainScreen()
+                GalleryScreen()
             }
         }
     }
@@ -53,7 +59,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun GalleryScreen() {
     val pokemonList = listOf(
         PokemonCardState(
             nameRes = R.string.pikachu_name,
@@ -91,41 +97,39 @@ fun MainScreen() {
             weakness = stringResource(R.string.weakness_fire),
             resistance = stringResource(R.string.resistance_water),
         ),
+        PokemonCardState(
+            nameRes = R.string.squirtle_name,
+            hp = "70",
+            imageRes = R.drawable.bicho,
+            descriptionRes = R.string.squirtle_desc,
+            attack1NameRes = R.string.squirtle_attack_1,
+            attack1Damage = "40",
+            attack2NameRes = R.string.squirtle_attack_2,
+            attack2Damage = "30",
+            weakness = stringResource(R.string.weakness_electric),
+            resistance = stringResource(R.string.resistance_steel),
+        ),
+        PokemonCardState(
+            nameRes = R.string.snorlax_name,
+            hp = "120",
+            imageRes = R.drawable.bicho,
+            descriptionRes = R.string.snorlax_desc,
+            attack1NameRes = R.string.snorlax_attack_1,
+            attack1Damage = "0",
+            attack2NameRes = R.string.snorlax_attack_2,
+            attack2Damage = "90",
+            weakness = stringResource(R.string.weakness_fighting),
+            resistance = stringResource(R.string.resistance_psychic),
+        ),
     )
 
-    var selectedIndex by remember { mutableIntStateOf(0) }
-    var menuExpanded by remember { mutableStateOf(false) }
+    val pagerState = rememberPagerState { pokemonList.size }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(text = "Pokédex - Carta Responsiva") },
-                actions = {
-                    Box(modifier = Modifier.padding(end = 8.dp)) {
-                        TextButton(onClick = { menuExpanded = true }) {
-                            Text(
-                                text = "Cambiar Pokémon ▾",
-                                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                                fontWeight = FontWeight.Bold,
-                            )
-                        }
-                        DropdownMenu(
-                            expanded = menuExpanded,
-                            onDismissRequest = { menuExpanded = false },
-                        ) {
-                            pokemonList.forEachIndexed { index, pokemon ->
-                                DropdownMenuItem(
-                                    text = { Text(text = stringResource(pokemon.nameRes)) },
-                                    onClick = {
-                                        selectedIndex = index
-                                        menuExpanded = false
-                                    },
-                                )
-                            }
-                        }
-                    }
-                },
+                title = { Text(text = "Galería TCG - 30th Celebration") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -139,13 +143,74 @@ fun MainScreen() {
                 .padding(innerPadding),
             color = MaterialTheme.colorScheme.background,
         ) {
-            Box(
+            Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp),
-                contentAlignment = Alignment.Center,
+                    .padding(vertical = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween,
             ) {
-                CrearCarta(pokemon = pokemonList[selectedIndex])
+                // Counter badge
+                Badge(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                ) {
+                    Text(
+                        text = "Carta ${pagerState.currentPage + 1} de ${pokemonList.size}",
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp,
+                    )
+                }
+
+                // Horizontal Pager Carousel
+                HorizontalPager(
+                    state = pagerState,
+                    contentPadding = PaddingValues(horizontal = 48.dp),
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth(),
+                ) { page ->
+                    val pageOffset = (pagerState.currentPage - page) + pagerState.currentPageOffsetFraction
+                    val absoluteOffset = pageOffset.absoluteValue
+                    val scale = lerp(0.85f, 1f, 1f - absoluteOffset.coerceIn(0f, 1f))
+                    val alpha = lerp(0.5f, 1f, 1f - absoluteOffset.coerceIn(0f, 1f))
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .graphicsLayer {
+                                scaleX = scale
+                                scaleY = scale
+                                this.alpha = alpha
+                            },
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        CrearCarta(pokemon = pokemonList[page])
+                    }
+                }
+
+                // Page Indicator Dots
+                Row(
+                    modifier = Modifier
+                        .padding(top = 8.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    repeat(pokemonList.size) { iteration ->
+                        val color = if (pagerState.currentPage == iteration) {
+                            MaterialTheme.colorScheme.primary
+                        } else {
+                            MaterialTheme.colorScheme.outlineVariant
+                        }
+                        Box(
+                            modifier = Modifier
+                                .padding(4.dp)
+                                .clip(CircleShape)
+                                .background(color)
+                                .size(8.dp),
+                        )
+                    }
+                }
             }
         }
     }
@@ -159,8 +224,8 @@ fun CrearCarta(pokemon: PokemonCardState) {
     ) {
         val cardAspectRatio = 0.714f
 
-        val availableWidth = maxWidth - 32.dp
-        val availableHeight = maxHeight - 32.dp
+        val availableWidth = maxWidth
+        val availableHeight = maxHeight
 
         val cardHeight: Dp
         val cardWidth: Dp
@@ -230,7 +295,7 @@ fun CrearCarta(pokemon: PokemonCardState) {
                 }
 
                 // Image Container with inner border
-                    Box(
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
@@ -336,6 +401,6 @@ fun CrearCarta(pokemon: PokemonCardState) {
 @Composable
 fun CartaPreview() {
     CartaresponsivapokemonTheme {
-        MainScreen()
+        GalleryScreen()
     }
 }
