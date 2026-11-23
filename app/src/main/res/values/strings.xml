@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">cartaresponsivapokemon</string>
+
+    <!-- Pikachu -->
+    <string name="pikachu_name">Pikachu</string>
+    <string name="pikachu_desc">Ratón eléctrico. Cuando se enfada, descarga la energía que almacena en las bolsas de sus mejillas.</string>
+    <string name="pikachu_attack_1">⚡ Impactrueno</string>
+    <string name="pikachu_attack_2">⚡ Ataque Rápido</string>
+
+    <!-- Charmander -->
+    <string name="charmander_name">Charmander</string>
+    <string name="charmander_desc">Iguana de fuego. La llama de su cola indica su salud y estado de ánimo.</string>
+    <string name="charmander_attack_1">🔥 Ascuas</string>
+    <string name="charmander_attack_2">🔥 Garra Feroz</string>
+
+    <!-- Bulbasaur -->
+    <string name="bulbasaur_name">Bulbasaur</string>
+    <string name="bulbasaur_desc">Semilla planta. Puede sobrevivir días sin comer gracias al bulbo de su lomo.</string>
+    <string name="bulbasaur_attack_1">🍃 Látigo Cepa</string>
+    <string name="bulbasaur_attack_2">🌿 Drenadoras</string>
+
+    <!-- Shared Labels -->
+    <string name="ps_label">PS</string>
+    <string name="image_desc">Imagen del Pokémon</string>
+    <string name="weakness_fighting">Debilidad: x2 Lucha</string>
+    <string name="weakness_water">Debilidad: x2 Agua</string>
+    <string name="weakness_fire">Debilidad: x2 Fuego</string>
+    <string name="resistance_steel">Resistencia: -20 Acero</string>
+    <string name="resistance_grass">Resistencia: -20 Planta</string>
+    <string name="resistance_water">Resistencia: -20 Agua</string>
+</resources>
