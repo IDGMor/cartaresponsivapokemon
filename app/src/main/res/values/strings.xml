@@ -31,9 +31,11 @@
     <string name="snorlax_attack_1">💤 Descanso</string>
     <string name="snorlax_attack_2">💥 Golpe Cuerpo</string>
 
-    <!-- Shared Labels -->
+    <!-- Shared Labels & Gallery UI -->
     <string name="ps_label">PS</string>
     <string name="image_desc">Imagen del Pokémon</string>
+    <string name="gallery_title">Galería TCG - 30th Celebration</string>
+    <string name="card_counter">Carta %1$d de %2$d</string>
     <string name="weakness_fighting">Debilidad: x2 Lucha</string>
     <string name="weakness_water">Debilidad: x2 Agua</string>
     <string name="weakness_fire">Debilidad: x2 Fuego</string>

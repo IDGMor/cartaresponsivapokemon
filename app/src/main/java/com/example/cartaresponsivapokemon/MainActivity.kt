@@ -129,7 +129,7 @@ fun GalleryScreen() {
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(text = "Galería TCG - 30th Celebration") },
+                title = { Text(text = stringResource(R.string.gallery_title)) },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -155,7 +155,7 @@ fun GalleryScreen() {
                     containerColor = MaterialTheme.colorScheme.secondaryContainer,
                 ) {
                     Text(
-                        text = "Carta ${pagerState.currentPage + 1} de ${pokemonList.size}",
+                        text = stringResource(R.string.card_counter, pagerState.currentPage + 1, pokemonList.size),
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                         fontWeight = FontWeight.Bold,
                         fontSize = 14.sp,
