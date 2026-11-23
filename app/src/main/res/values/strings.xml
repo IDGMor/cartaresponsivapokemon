@@ -44,4 +44,19 @@
     <string name="resistance_grass">Resistencia: -20 Planta</string>
     <string name="resistance_water">Resistencia: -20 Agua</string>
     <string name="resistance_psychic">Resistencia: -20 Psíquico</string>
+
+    <!-- HP & Damage Stats -->
+    <string name="hp_60">60</string>
+    <string name="hp_70">70</string>
+    <string name="hp_80">80</string>
+    <string name="hp_120">120</string>
+
+    <string name="damage_0">0</string>
+    <string name="damage_30">30</string>
+    <string name="damage_35">35</string>
+    <string name="damage_40">40</string>
+    <string name="damage_45">45</string>
+    <string name="damage_50">50</string>
+    <string name="damage_55">55</string>
+    <string name="damage_90">90</string>
 </resources>

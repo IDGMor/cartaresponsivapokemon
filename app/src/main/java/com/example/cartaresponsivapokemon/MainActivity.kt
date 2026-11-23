@@ -211,7 +211,7 @@ fun CrearCarta(pokemon: PokemonCardState) {
                         )
                         Spacer(modifier = Modifier.width(2.dp))
                         Text(
-                            text = pokemon.hp,
+                            text = stringResource(pokemon.hpRes),
                             fontWeight = FontWeight.Bold,
                             fontSize = 20.sp,
                             color = Color(0xFF333333),
@@ -272,7 +272,7 @@ fun CrearCarta(pokemon: PokemonCardState) {
                             color = Color.Black,
                         )
                         Text(
-                            text = pokemon.attack1Damage,
+                            text = stringResource(pokemon.attack1DamageRes),
                             fontWeight = FontWeight.Bold,
                             fontSize = 14.sp,
                             color = Color.Black,
@@ -291,7 +291,7 @@ fun CrearCarta(pokemon: PokemonCardState) {
                             color = Color.Black,
                         )
                         Text(
-                            text = pokemon.attack2Damage,
+                            text = stringResource(pokemon.attack2DamageRes),
                             fontWeight = FontWeight.Bold,
                             fontSize = 14.sp,
                             color = Color.Black,
